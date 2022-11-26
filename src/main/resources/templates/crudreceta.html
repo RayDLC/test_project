@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="index :: head">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+	<header th:replace="index :: header"></header>
+
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center" th:text="${titulo}"></h1>
+				<div class="card-body">
+					<form th:action="@{/receta/crudgrabar}" th:object="${receta}" method="post">
+						<input type="hidden" th:field="*{id_receta}" th:value="${receta.id_receta}" />
+						<div class="form-group">
+							<h6>Nombre : </h6>
+							<input type="text" th:field="*{rec_nombre}" class="form-control"
+								th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('rec_nombre')}"
+								th:errors="*{rec_nombre}"></small>
+						</div>
+						<div class="form-group">
+							<h6 for="inputPro">Tipo</h6>
+							<select id="inputPro" class="form-control" th:field="*{id_tipo}">
+								<option value="-1">Seleccione...</option>
+								<option th:each="t : ${lstTipos}" th:value="${t.id_tipo}"
+									th:text="${t.tip_descripcion}">
+								</option>
+							</select>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('id_tipo')}"
+								th:errors="*{id_tipo}"></small>
+						</div>
+						<div class="form-group">
+							<h6 for="inputPro">Duracion</h6>
+							<select id="inputPro" class="form-control" th:field="*{id_duracion}">
+								<option value="-1">Seleccione...</option>
+								<option th:each="d : ${lstDuracion}" th:value="${d.id_duracion}"
+									th:text="${d.dur_descripcion}">
+								</option>
+							</select>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('id_duracion')}"
+								th:errors="*{id_duracion}"></small>
+						</div>
+						<div class="form-group">
+							<h6>Ingredientes : </h6>
+							<textarea type="text" th:field="*{rec_ingredientes}" class="form-control"
+								th:errorclass="'form-control alert-danger'"></textarea>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('rec_ingredientes')}"
+								th:errors="*{rec_ingredientes}"></small>
+						</div>
+						<div class="form-group">
+							<h6>Instrucciones : </h6>
+							<textarea type="text" th:field="*{rec_instrucciones}" class="form-control"
+								th:errorclass="'form-control alert-danger'"></textarea>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('rec_instrucciones')}"
+								th:errors="*{rec_instrucciones}"></small>
+						</div>
+						<div class="box-footer">
+							<input type="submit" value="Guardar" class="btn btn-primary">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="index :: footer"></footer>
+</body>
+
+</html>

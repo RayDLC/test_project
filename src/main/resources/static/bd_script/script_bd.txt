@@ -1,0 +1,65 @@
+-- borra la bd si existe
+DROP DATABASE IF EXISTS recetasforyou;
+-- creamos la bd
+CREATE DATABASE recetasforyou;
+-- activamos la bd
+USE recetasforyou;
+
+-- Credenciales para ingresar a la pagina aplicacion
+-- Usuario normal: ray
+-- Password: 12345
+
+-- Usuario admin: admin
+-- Password: 12345
+
+-- TABLAS
+create table tipos(
+	id_tipo	int not null primary key,
+	tip_descripcion varchar(30)
+);
+
+create table duracion(
+	id_duracion	int not null primary key,
+	dur_descripcion varchar(30)
+);
+
+create table recetas(
+	id_receta int auto_increment,
+	rec_nombre varchar(255) not null,
+    id_tipo int,
+    id_duracion int,
+	rec_ingredientes text not null,
+	rec_instrucciones text not null,
+primary key (id_receta),
+-- foreign key (id_usuario) references usuarios(id_usuario),
+-- foreign key (id_resena) references resena(id_resena),
+foreign key (id_tipo) references tipos(id_tipo),
+foreign key (id_duracion) references duracion(id_duracion)
+);
+
+
+-- INSERTS
+insert into tipos values (1, 'Omnivoro');
+insert into tipos values (2, 'Carnivoro');
+insert into tipos values (3, 'Vegetariano');
+
+insert into duracion values (1, 'De 30 a 60 minutos');
+insert into duracion values (2, 'De 1 a 2 horas');
+insert into duracion values (3, 'Mas de 3 horas');
+
+
+insert into recetas values (null,'Receta Numero Uno',1,1,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Dos',1,3,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Tres',1,3,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Cuatro',2,1,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Cinco',2,2,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Seis',2,3,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Siete',3,1,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Ocho',3,2,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+insert into recetas values (null,'Receta Numero Nueve',3,3,"Ingredientes de una deliciosa Receta","Preparacion de una magnifica Receta");
+
+
+-- CONSULTAS
+SELECT * FROM tipos;
+SELECT * FROM duracion;
+select * from recetas;
